@@ -141,6 +141,10 @@
       color: #aaa;
       font-size: 0.9em;
     }
+    .locked {
+      color: #888;
+      font-style: italic;
+    }
     @media (max-width: 768px) {
       .group {
         width: 100%;
@@ -158,7 +162,7 @@
     <!-- Header -->
     <header>
       <h1>DLS ADDICTS TOURNAMENT</h1>
-      <p class="tagline">Dream League Soccer | 8 Teams. 1 Champion.</p>
+      <p class="tagline">Dream League Soccer | Group Stage & Knockouts</p>
     </header>
 
     <!-- Groups Section -->
@@ -182,10 +186,10 @@
       </div>
     </section>
 
-    <!-- Fixtures -->
+    <!-- Group Stage Fixtures -->
     <section>
-      <h2>📅 Fixtures</h2>
-      <table id="fixturesTable">
+      <h2>🔁 Group Stage Fixtures</h2>
+      <table id="groupFixtures">
         <tr>
           <th>Match</th>
           <th>Team A</th>
@@ -206,35 +210,116 @@
         </tr>
         <tr>
           <td>Match 3</td>
-          <td>CREED FC</td>
-          <td>LORNA FC</td>
+          <td>VENON FC</td>
+          <td>DRAXLER FC</td>
           <td><button class="btn" onclick="addResult(2)">Add</button></td>
         </tr>
         <tr>
           <td>Match 4</td>
-          <td>LEGENDS FC</td>
-          <td>BLACK PEARL FC</td>
+          <td>LAVISCO FC</td>
+          <td>TECH FC</td>
           <td><button class="btn" onclick="addResult(3)">Add</button></td>
         </tr>
         <tr>
           <td>Match 5</td>
           <td>VENON FC</td>
-          <td>DRAXLER FC</td>
+          <td>TECH FC</td>
           <td><button class="btn" onclick="addResult(4)">Add</button></td>
         </tr>
         <tr>
           <td>Match 6</td>
           <td>LAVISCO FC</td>
-          <td>TECH FC</td>
+          <td>DRAXLER FC</td>
           <td><button class="btn" onclick="addResult(5)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 7</td>
+          <td>CREED FC</td>
+          <td>LORNA FC</td>
+          <td><button class="btn" onclick="addResult(6)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 8</td>
+          <td>LEGENDS FC</td>
+          <td>BLACK PEARL FC</td>
+          <td><button class="btn" onclick="addResult(7)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 9</td>
+          <td>CREED FC</td>
+          <td>LEGENDS FC</td>
+          <td><button class="btn" onclick="addResult(8)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 10</td>
+          <td>LORNA FC</td>
+          <td>BLACK PEARL FC</td>
+          <td><button class="btn" onclick="addResult(9)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 11</td>
+          <td>CREED FC</td>
+          <td>BLACK PEARL FC</td>
+          <td><button class="btn" onclick="addResult(10)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 12</td>
+          <td>LORNA FC</td>
+          <td>LEGENDS FC</td>
+          <td><button class="btn" onclick="addResult(11)">Add</button></td>
         </tr>
       </table>
     </section>
 
-    <!-- Results -->
+    <!-- Knockout Stage -->
     <section>
-      <h2>📊 Results & Standings</h2>
-      <table id="resultsTable">
+      <h2>⚡ Knockout Stage</h2>
+      <table id="knockoutFixtures">
+        <tr>
+          <th>Stage</th>
+          <th>Team A</th>
+          <th>vs</th>
+          <th>Team B</th>
+          <th>Result</th>
+        </tr>
+        <!-- Quarter-Finals -->
+        <tr>
+          <td>QF 1</td>
+          <td id="qf1a" class="locked">1st Grp A</td>
+          <td>vs</td>
+          <td id="qf1b" class="locked">2nd Grp B</td>
+          <td><button class="btn" onclick="addKnockoutResult(0)" disabled>Add</button></td>
+        </tr>
+        <tr>
+          <td>QF 2</td>
+          <td id="qf2a" class="locked">1st Grp B</td>
+          <td>vs</td>
+          <td id="qf2b" class="locked">2nd Grp A</td>
+          <td><button class="btn" onclick="addKnockoutResult(1)" disabled>Add</button></td>
+        </tr>
+        <!-- Semi-Finals -->
+        <tr>
+          <td>SF 1</td>
+          <td id="sf1a" class="locked">Winner QF1</td>
+          <td>vs</td>
+          <td id="sf1b" class="locked">Winner QF2</td>
+          <td><button class="btn" onclick="addKnockoutResult(2)" disabled>Add</button></td>
+        </tr>
+        <!-- Final -->
+        <tr>
+          <td>🏆 FINAL</td>
+          <td id="finalA" class="locked">Winner SF1</td>
+          <td>vs</td>
+          <td id="finalB" class="locked">Winner SF2</td>
+          <td><button class="btn" onclick="addKnockoutResult(3)" disabled>Add</button></td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Results & Standings -->
+    <section>
+      <h2>📊 Group Standings</h2>
+      <table id="standingsTable">
         <tr>
           <th>Team</th>
           <th>MP</th>
@@ -258,24 +343,14 @@
     <!-- Footer -->
     <footer>
       <p>© 2025 DLS Addicts Tournament | Created for Lavisco Dream League Soccer Fans</p>
-      <p>#DLSAddicts #TournamentMode #FootballFever</p>
+      <p>#DLSAddicts #TournamentMode #RoadToGlory</p>
     </footer>
 
   </div>
 
-  <!-- JavaScript for Adding Results -->
+  <!-- JavaScript -->
   <script>
-    // Match data store
-    const matches = [
-      { index: 0, teamA: "VENON FC", teamB: "LAVISCO FC" },
-      { index: 1, teamA: "DRAXLER FC", teamB: "TECH FC" },
-      { index: 2, teamA: "CREED FC", teamB: "LORNA FC" },
-      { index: 3, teamA: "LEGENDS FC", teamB: "BLACK PEARL FC" },
-      { index: 4, teamA: "VENON FC", teamB: "DRAXLER FC" },
-      { index: 5, teamA: "LAVISCO FC", teamB: "TECH FC" }
-    ];
-
-    // Standings data (team => stats)
+    // Standings data
     const standings = {
       "VENON FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
       "LAVISCO FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
@@ -287,57 +362,153 @@
       "BLACK PEARL FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 }
     };
 
-    function addResult(matchIndex) {
-      const match = matches[matchIndex];
+    // Group stage matches
+    const groupMatches = [
+      { teamA: "VENON FC", teamB: "LAVISCO FC" },
+      { teamA: "DRAXLER FC", teamB: "TECH FC" },
+      { teamA: "VENON FC", teamB: "DRAXLER FC" },
+      { teamA: "LAVISCO FC", teamB: "TECH FC" },
+      { teamA: "VENON FC", teamB: "TECH FC" },
+      { teamA: "LAVISCO FC", teamB: "DRAXLER FC" },
+      { teamA: "CREED FC", teamB: "LORNA FC" },
+      { teamA: "LEGENDS FC", teamB: "BLACK PEARL FC" },
+      { teamA: "CREED FC", teamB: "LEGENDS FC" },
+      { teamA: "LORNA FC", teamB: "BLACK PEARL FC" },
+      { teamA: "CREED FC", teamB: "BLACK PEARL FC" },
+      { teamA: "LORNA FC", teamB: "LEGENDS FC" }
+    ];
+
+    // Knockout stage tracking
+    const knockouts = {
+      qf1: null, qf2: null,
+      sf1: null, sf2: null,
+      final: null
+    };
+
+    // Add group stage result
+    function addResult(index) {
+      const match = groupMatches[index];
       const scoreA = prompt(`Enter score for ${match.teamA}:`);
       const scoreB = prompt(`Enter score for ${match.teamB}:`);
 
       if (scoreA !== null && scoreB !== null && /^\d+$/.test(scoreA) && /^\d+$/.test(scoreB)) {
-        // Update fixture result
-        const table = document.getElementById("fixturesTable");
-        table.rows[matchIndex + 1].cells[3].innerHTML = `${scoreA} - ${scoreB}`;
-
-        // Update standings
         const goalsA = parseInt(scoreA);
         const goalsB = parseInt(scoreB);
+        
+        // Update fixture
+        document.querySelector(`#groupFixtures tbody tr:nth-child(${index + 2}) td:last-child`).innerHTML = `${goalsA} - ${goalsB}`;
+
+        // Update standings
         updateStandings(match.teamA, match.teamB, goalsA, goalsB);
         updateStandingsTable();
+        updateKnockoutQualifiers();
       }
     }
 
+    // Update standings
     function updateStandings(teamA, teamB, scoreA, scoreB) {
-      const statsA = standings[teamA];
-      const statsB = standings[teamB];
+      const a = standings[teamA];
+      const b = standings[teamB];
 
-      statsA.mp += 1;
-      statsB.mp += 1;
-      statsA.gd += (scoreA - scoreB);
-      statsB.gd += (scoreB - scoreA);
+      a.mp++; b.mp++;
+      a.gd += (scoreA - scoreB);
+      b.gd += (scoreB - scoreA);
 
       if (scoreA > scoreB) {
-        statsA.w += 1; statsB.l += 1;
-        statsA.pts += 3;
+        a.w++; b.l++;
+        a.pts += 3;
       } else if (scoreA < scoreB) {
-        statsB.w += 1; statsA.l += 1;
-        statsB.pts += 3;
+        b.w++; a.l++;
+        b.pts += 3;
       } else {
-        statsA.d += 1; statsB.d += 1;
-        statsA.pts += 1;
-        statsB.pts += 1;
+        a.d++; b.d++;
+        a.pts += 1;
+        b.pts += 1;
       }
     }
 
+    // Update standings table
     function updateStandingsTable() {
-      const table = document.getElementById("resultsTable");
+      const table = document.getElementById("standingsTable");
       for (let i = 1; i < table.rows.length; i++) {
         const team = table.rows[i].cells[0].textContent;
-        const data = standings[team];
-        table.rows[i].cells[1].textContent = data.mp;
-        table.rows[i].cells[2].textContent = data.w;
-        table.rows[i].cells[3].textContent = data.d;
-        table.rows[i].cells[4].textContent = data.l;
-        table.rows[i].cells[5].textContent = data.gd;
-        table.rows[i].cells[6].textContent = data.pts;
+        const s = standings[team];
+        table.rows[i].cells[1].textContent = s.mp;
+        table.rows[i].cells[2].textContent = s.w;
+        table.rows[i].cells[3].textContent = s.d;
+        table.rows[i].cells[4].textContent = s.l;
+        table.rows[i].cells[5].textContent = s.gd;
+        table.rows[i].cells[6].textContent = s.pts;
+      }
+    }
+
+    // Update knockout qualifiers based on standings
+    function updateKnockoutQualifiers() {
+      // Sort teams by points, GD
+      const groupA = ["VENON FC", "LAVISCO FC", "DRAXLER FC", "TECH FC"].sort(compareTeam);
+      const groupB = ["CREED FC", "LORNA FC", "LEGENDS FC", "BLACK PEARL FC"].sort(compareTeam);
+
+      const a1 = groupA[0], a2 = groupA[1];
+      const b1 = groupB[0], b2 = groupB[1];
+
+      // Update QF
+      document.getElementById("qf1a").textContent = a1;
+      document.getElementById("qf1b").textContent = b2;
+      document.getElementById("qf2a").textContent = b1;
+      document.getElementById("qf2b").textContent = a2;
+
+      // Enable QF buttons
+      document.querySelectorAll("#knockoutFixtures .btn")[0].disabled = false;
+      document.querySelectorAll("#knockoutFixtures .btn")[1].disabled = false;
+    }
+
+    function compareTeam(a, b) {
+      const sa = standings[a];
+      const sb = standings[b];
+      if (sa.pts !== sb.pts) return sb.pts - sa.pts;
+      if (sa.gd !== sb.gd) return sb.gd - sa.gd;
+      return sb.w - sa.w; // Tiebreaker
+    }
+
+    // Knockout results
+    function addKnockoutResult(stageIndex) {
+      let teamA, teamB, winnerId, nextBtnIndex;
+
+      if (stageIndex === 0) {
+        teamA = document.getElementById("qf1a").textContent;
+        teamB = document.getElementById("qf1b").textContent;
+        winnerId = "sf1a";
+        nextBtnIndex = 2;
+      } else if (stageIndex === 1) {
+        teamA = document.getElementById("qf2a").textContent;
+        teamB = document.getElementById("qf2b").textContent;
+        winnerId = "sf1b";
+        nextBtnIndex = 2;
+      } else if (stageIndex === 2) {
+        teamA = document.getElementById("sf1a").textContent;
+        teamB = document.getElementById("sf1b").textContent;
+        winnerId = "finalA";
+        nextBtnIndex = 3;
+      } else if (stageIndex === 3) {
+        teamA = document.getElementById("finalA").textContent;
+        teamB = document.getElementById("finalB").textContent;
+        winnerId = null;
+        alert("🎉 Tournament Complete! Refresh to reset.");
+        return;
+      }
+
+      const scoreA = prompt(`Score for ${teamA}:`);
+      const scoreB = prompt(`Score for ${teamB}:`);
+
+      if (scoreA !== null && scoreB !== null && /^\d+$/.test(scoreA) && /^\d+$/.test(scoreB)) {
+        const winner = parseInt(scoreA) > parseInt(scoreB) ? teamA : teamB;
+        const resultCell = document.querySelectorAll("#knockoutFixtures .btn")[stageIndex].parentElement;
+        resultCell.innerHTML = `${scoreA}-${scoreB}`;
+
+        if (winnerId) {
+          document.getElementById(winnerId).textContent = winner;
+          document.querySelectorAll("#knockoutFixtures .btn")[nextBtnIndex].disabled = false;
+        }
       }
     }
   </script>
