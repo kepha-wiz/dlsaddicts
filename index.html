@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DLS Addicts Tournament</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0a310f, #1a5c23);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      background: url('https://img.freepik.com/free-vector/football-background-with-soccer-ball-pattern_1308-74427.jpg') no-repeat center;
+      background-size: cover;
+      padding: 60px 20px;
+      border-radius: 10px;
+      position: relative;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      z-index: 0;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      font-size: 3.2em;
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00cc00;
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    p.tagline {
+      position: relative;
+      z-index: 1;
+      font-size: 1.2em;
+      color: #ccc;
+      margin-top: 10px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background: rgba(20, 40, 20, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    h2 {
+      color: #00ff00;
+      border-bottom: 2px solid #00ff00;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 1em;
+    }
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border: 1px solid #00ff00;
+      color: #fff;
+    }
+    th {
+      background: #003300;
+      color: #00ff00;
+      font-weight: bold;
+    }
+    tr:nth-child(even) {
+      background: rgba(0, 100, 0, 0.2);
+    }
+    .btn {
+      background: #00cc00;
+      color: black;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #00ff00;
+      transform: scale(1.05);
+    }
+    .group-box {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .group {
+      background: rgba(0, 50, 0, 0.6);
+      border: 1px solid #00ff00;
+      border-radius: 10px;
+      padding: 15px;
+      width: 45%;
+      min-width: 300px;
+    }
+    .group h3 {
+      margin-top: 0;
+      color: #00ff00;
+      text-align: center;
+    }
+    .team {
+      font-size: 1.1em;
+      padding: 8px;
+      background: rgba(0, 100, 0, 0.3);
+      margin: 6px 0;
+      border-radius: 6px;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+    @media (max-width: 768px) {
+      .group {
+        width: 100%;
+      }
+      h1 {
+        font-size: 2.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1>DLS ADDICTS TOURNAMENT</h1>
+      <p class="tagline">Dream League Soccer | 8 Teams. 1 Champion.</p>
+    </header>
+
+    <!-- Groups Section -->
+    <section>
+      <h2>🏆 Tournament Groups</h2>
+      <div class="group-box">
+        <div class="group">
+          <h3>Group A</h3>
+          <div class="team">VENON FC</div>
+          <div class="team">LAVISCO FC</div>
+          <div class="team">DRAXLER FC</div>
+          <div class="team">TECH FC</div>
+        </div>
+        <div class="group">
+          <h3>Group B</h3>
+          <div class="team">CREED FC</div>
+          <div class="team">LORNA FC</div>
+          <div class="team">LEGENDS FC</div>
+          <div class="team">BLACK PEARL FC</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fixtures -->
+    <section>
+      <h2>📅 Fixtures</h2>
+      <table id="fixturesTable">
+        <tr>
+          <th>Match</th>
+          <th>Team A</th>
+          <th>Team B</th>
+          <th>Result</th>
+        </tr>
+        <tr>
+          <td>Match 1</td>
+          <td>VENON FC</td>
+          <td>LAVISCO FC</td>
+          <td><button class="btn" onclick="addResult(0)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 2</td>
+          <td>DRAXLER FC</td>
+          <td>TECH FC</td>
+          <td><button class="btn" onclick="addResult(1)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 3</td>
+          <td>CREED FC</td>
+          <td>LORNA FC</td>
+          <td><button class="btn" onclick="addResult(2)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 4</td>
+          <td>LEGENDS FC</td>
+          <td>BLACK PEARL FC</td>
+          <td><button class="btn" onclick="addResult(3)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 5</td>
+          <td>VENON FC</td>
+          <td>DRAXLER FC</td>
+          <td><button class="btn" onclick="addResult(4)">Add</button></td>
+        </tr>
+        <tr>
+          <td>Match 6</td>
+          <td>LAVISCO FC</td>
+          <td>TECH FC</td>
+          <td><button class="btn" onclick="addResult(5)">Add</button></td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Results -->
+    <section>
+      <h2>📊 Results & Standings</h2>
+      <table id="resultsTable">
+        <tr>
+          <th>Team</th>
+          <th>MP</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GD</th>
+          <th>PTS</th>
+        </tr>
+        <tr><td>VENON FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>LAVISCO FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>DRAXLER FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>TECH FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>CREED FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>LORNA FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>LEGENDS FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>BLACK PEARL FC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 DLS Addicts Tournament | Created for Lavisco Dream League Soccer Fans</p>
+      <p>#DLSAddicts #TournamentMode #FootballFever</p>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript for Adding Results -->
+  <script>
+    // Match data store
+    const matches = [
+      { index: 0, teamA: "VENON FC", teamB: "LAVISCO FC" },
+      { index: 1, teamA: "DRAXLER FC", teamB: "TECH FC" },
+      { index: 2, teamA: "CREED FC", teamB: "LORNA FC" },
+      { index: 3, teamA: "LEGENDS FC", teamB: "BLACK PEARL FC" },
+      { index: 4, teamA: "VENON FC", teamB: "DRAXLER FC" },
+      { index: 5, teamA: "LAVISCO FC", teamB: "TECH FC" }
+    ];
+
+    // Standings data (team => stats)
+    const standings = {
+      "VENON FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "LAVISCO FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "DRAXLER FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "TECH FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "CREED FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "LORNA FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "LEGENDS FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 },
+      "BLACK PEARL FC": { mp: 0, w: 0, d: 0, l: 0, gd: 0, pts: 0 }
+    };
+
+    function addResult(matchIndex) {
+      const match = matches[matchIndex];
+      const scoreA = prompt(`Enter score for ${match.teamA}:`);
+      const scoreB = prompt(`Enter score for ${match.teamB}:`);
+
+      if (scoreA !== null && scoreB !== null && /^\d+$/.test(scoreA) && /^\d+$/.test(scoreB)) {
+        // Update fixture result
+        const table = document.getElementById("fixturesTable");
+        table.rows[matchIndex + 1].cells[3].innerHTML = `${scoreA} - ${scoreB}`;
+
+        // Update standings
+        const goalsA = parseInt(scoreA);
+        const goalsB = parseInt(scoreB);
+        updateStandings(match.teamA, match.teamB, goalsA, goalsB);
+        updateStandingsTable();
+      }
+    }
+
+    function updateStandings(teamA, teamB, scoreA, scoreB) {
+      const statsA = standings[teamA];
+      const statsB = standings[teamB];
+
+      statsA.mp += 1;
+      statsB.mp += 1;
+      statsA.gd += (scoreA - scoreB);
+      statsB.gd += (scoreB - scoreA);
+
+      if (scoreA > scoreB) {
+        statsA.w += 1; statsB.l += 1;
+        statsA.pts += 3;
+      } else if (scoreA < scoreB) {
+        statsB.w += 1; statsA.l += 1;
+        statsB.pts += 3;
+      } else {
+        statsA.d += 1; statsB.d += 1;
+        statsA.pts += 1;
+        statsB.pts += 1;
+      }
+    }
+
+    function updateStandingsTable() {
+      const table = document.getElementById("resultsTable");
+      for (let i = 1; i < table.rows.length; i++) {
+        const team = table.rows[i].cells[0].textContent;
+        const data = standings[team];
+        table.rows[i].cells[1].textContent = data.mp;
+        table.rows[i].cells[2].textContent = data.w;
+        table.rows[i].cells[3].textContent = data.d;
+        table.rows[i].cells[4].textContent = data.l;
+        table.rows[i].cells[5].textContent = data.gd;
+        table.rows[i].cells[6].textContent = data.pts;
+      }
+    }
+  </script>
+
+</body>
+</html>
